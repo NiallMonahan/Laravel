@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 
 class EventSeeder extends Seeder
 {
@@ -12,37 +13,19 @@ class EventSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('events')->insert([
-            [
-                'title' => 'Summer Skate Jam',
-                'description' => 'An outdoor skateboarding competition with live music and food trucks.',
-                'event_date' => '2025-07-15',
-                'location' => 'Dublin Skatepark',
-                'capacity' => 200,
-                'image' => 'skatejam.jpg',
+        $faker = Faker::create();
+
+        foreach (range(1, 50) as $index) {
+            DB::table('events')->insert([
+                'title' => $faker->sentence(3),              // random event name
+                'description' => $faker->paragraph,          // random description
+                'event_date' => $faker->dateTimeBetween('+1 week', '+1 year'),
+                'location' => $faker->city,                  // random city name
+                'capacity' => $faker->numberBetween(50, 500),
+                'image' => $faker->word . '.jpg',            // fake image filename
                 'created_at' => now(),
                 'updated_at' => now(),
-            ],
-            [
-                'title' => 'Winter Chill Fest',
-                'description' => 'Indoor skating event with pro demos and a DJ set.',
-                'event_date' => '2025-12-05',
-                'location' => 'Belfast Arena',
-                'capacity' => 500,
-                'image' => 'winterfest.jpg',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'title' => 'Street Skating Showdown',
-                'description' => 'Head-to-head battles on custom street-style obstacles.',
-                'event_date' => '2026-03-20',
-                'location' => 'Cork City Center',
-                'capacity' => 150,
-                'image' => 'showdown.png',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ]);
+            ]);
+        }
     }
 }
