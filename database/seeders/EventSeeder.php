@@ -75,7 +75,7 @@ class EventSeeder extends Seeder
                 'event_date' => $faker->dateTimeBetween('+1 week', '+1 year'),
                 'location' => $faker->city,
                 'capacity' => $faker->numberBetween(50, 500),
-                'image' => 'PlaceHolder.jpg', // ✅ Always use this image
+                'image' => 'PlaceHolder' . $faker->numberBetween(1, 2) . '.jpg', // ✅ Always use this image
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

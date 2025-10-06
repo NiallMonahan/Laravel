@@ -7,14 +7,21 @@
         @else
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 @foreach($events as $event)
-                    <div class="p-4 bg-white shadow rounded-xl">
+                    <div
+                        class="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300">
                         <img src="{{ asset('images/' . $event->image) }}" alt="{{ $event->title }} image"
-                            class="w-full h-48 object-cover rounded-lg mb-3"
-                            onerror="this.src='{{ asset('images/PlaceHolder.jpg') }}'">
-                        <h2 class="text-lg font-semibold">{{ $event->title ?? 'Untitled Event' }}</h2>
-                        <p class="text-sm text-gray-700 mt-2">{{ $event->description ?? 'No description available.' }}</p>
+                            class="w-full h-64 object-cover" onerror="this.src='{{ asset('images/PlaceHolder2.jpg') }}'">
+                        <div class="p-5">
+                            <h2 class="text-xl font-semibold text-gray-900 mb-2 text-center">
+                                {{ $event->title ?? 'Untitled Event' }}
+                            </h2>
+                            <p class="text-sm text-gray-600 text-justify">
+                                {{ $event->description ?? 'No description available.' }}
+                            </p>
+                        </div>
                     </div>
                 @endforeach
+
 
             </div>
         @endif
