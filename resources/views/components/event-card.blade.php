@@ -1,5 +1,4 @@
-<div>
-    <!@props([
+@props([
     'title' => 'Untitled Event',
     'description' => null,
     'image' => 'PlaceHolder.jpg',
@@ -38,5 +37,4 @@
             Book Now!
         </a>
     </div>
-</div>
 </div>
