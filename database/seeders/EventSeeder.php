@@ -15,14 +15,68 @@ class EventSeeder extends Seeder
     {
         $faker = Faker::create();
 
+        $adjectives = [
+            'Epic',
+            'Vibrant',
+            'Magical',
+            'Legendary',
+            'Electric',
+            'Midnight',
+            'Golden',
+            'Urban',
+            'Cosmic',
+            'Mystic',
+            'Sunset',
+            'Neon',
+            'Wild',
+            'Royal',
+            'Chill'
+        ];
+
+        $nouns = [
+            'Festival',
+            'Gathering',
+            'Showcase',
+            'Night',
+            'Celebration',
+            'Carnival',
+            'Rave',
+            'Meetup',
+            'Jam',
+            'Summit',
+            'Fiesta',
+            'Expo',
+            'Soirée',
+            'Show',
+            'Experience'
+        ];
+
+        $partySynonyms = [
+            'Bash',
+            'Party',
+            'Gala',
+            'Rendezvous',
+            'Event',
+            'Mixer',
+            'Session',
+            'Ceremony',
+            'Occasion',
+            'Blast'
+        ];
+
         foreach (range(1, 50) as $index) {
+            // Randomly combine words to form unique names
+            $title = $faker->randomElement($adjectives) . ' ' .
+                $faker->randomElement($nouns) . ' ' .
+                $faker->randomElement($partySynonyms);
+
             DB::table('events')->insert([
-                'title' => $faker->sentence(3),              // random event name
-                'description' => $faker->paragraph,          // random description
+                'title' => $title,
+                'description' => $faker->paragraph,
                 'event_date' => $faker->dateTimeBetween('+1 week', '+1 year'),
-                'location' => $faker->city,                  // random city name
+                'location' => $faker->city,
                 'capacity' => $faker->numberBetween(50, 500),
-                'image' => $faker->word . '.jpg',            // fake image filename
+                'image' => $faker->word . '.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
