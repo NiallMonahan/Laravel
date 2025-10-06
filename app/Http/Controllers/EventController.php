@@ -41,8 +41,10 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        // Laravel automatically finds the event by ID (implicit model binding)
+        return view('events.show', compact('event'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
