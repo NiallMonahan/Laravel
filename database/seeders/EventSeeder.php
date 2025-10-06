@@ -65,7 +65,6 @@ class EventSeeder extends Seeder
         ];
 
         foreach (range(1, 50) as $index) {
-            // Randomly combine words to form unique names
             $title = $faker->randomElement($adjectives) . ' ' .
                 $faker->randomElement($nouns) . ' ' .
                 $faker->randomElement($partySynonyms);
@@ -76,7 +75,7 @@ class EventSeeder extends Seeder
                 'event_date' => $faker->dateTimeBetween('+1 week', '+1 year'),
                 'location' => $faker->city,
                 'capacity' => $faker->numberBetween(50, 500),
-                'image' => $faker->word . '.jpg',
+                'image' => 'PlaceHolder.jpg', // ✅ Always use this image
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
