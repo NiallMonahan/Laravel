@@ -8,12 +8,12 @@
 ])
 
 <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col hover:scale-[1.02] transition">
-    <img
-        src="{{ asset('images/' . $image) }}"
-        alt="{{ $title }} image"
-        class="w-full h-64 object-cover"
-        onerror="this.src='{{ asset('images/PlaceHolder.jpg') }}'"
-    />
+<img
+    src="{{ asset("images/events/" . $image) }}"
+    alt="{{ $title }} image"
+    class="w-full h-64 object-cover"
+/>
+
     <div class="p-5 flex flex-col gap-2">
         <h3 class="text-xl font-semibold text-gray-900">{{ $title }}</h3>
 

@@ -7,10 +7,9 @@
         @else
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($events as $event)
-                    <a href="{{ route('events.show', $event->id) }}" class="block hover:scale-[1.01] transition">
-                        <x-event-card :title="$event->title" :description="$event->description" :image="$event->image"
-                            :date="$event->event_date ?? null" :location="$event->location ?? null" bookUrl="#" />
-                    </a>
+                    <x-event-card :title="$event->title" :description="$event->description" :image="$event->image"
+                        :date="$event->event_date ?? null" :location="$event->location ?? null" :bookUrl="route('events.show', $event->id)" />
+
                 @endforeach
             </div>
         @endif

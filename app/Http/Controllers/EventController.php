@@ -25,7 +25,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        return view('events.create');
+
     }
 
     /**
@@ -33,8 +34,26 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'event_date' => 'required|date',
+            'location' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+        ]);
+
+        if ($request->hasFile('image')) {
+            // Follow Anne's method: move the file to the public folder
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('images/events'), $imageName);
+            $validated['image'] = $imageName;
+        }
+
+        Event::create($validated);
+
+        return redirect()->route('events.index')->with('success', 'Event created successfully!');
     }
+
 
     /**
      * Display the specified resource.

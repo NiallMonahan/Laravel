@@ -2,9 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-    //
+    use HasFactory;
+
+    // Allow these attributes to be mass-assigned
+    protected $fillable = [
+        'title',
+        'description',
+        'event_date',
+        'location',
+        'image',
+    ];
 }

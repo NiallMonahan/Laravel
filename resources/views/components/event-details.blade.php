@@ -8,10 +8,10 @@
 
         <!-- Event Image -->
         <div class="overflow-hidden rounded-lg mb-4 flex justify-center">
-            <img src="{{ asset('images/' . $image) }}" alt="{{ $title }}"
-                class="w-full max-w-md h-auto object-cover rounded-lg"
-                onerror="this.src='{{ asset('images/PlaceHolder.jpg') }}'">
+            <img src="{{ asset($image) }}" alt="{{ $title }}" class="w-full max-w-md h-auto object-cover rounded-lg"
+                onerror="this.src='{{ asset('images/PlaceHolder2.jpg') }}'">
         </div>
+
 
         <!-- Date / Location / Capacity -->
         <div class="text-gray-600 text-sm mb-4 space-y-1">
