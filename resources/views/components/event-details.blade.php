@@ -8,7 +8,8 @@
 
         <!-- Event Image -->
         <div class="overflow-hidden rounded-lg mb-4 flex justify-center">
-            <img src="{{ asset($image) }}" alt="{{ $title }}" class="w-full max-w-md h-auto object-cover rounded-lg"
+            <img src="{{ asset("images/events/" . $image) }}" alt="{{ $title }}"
+                class="w-full max-w-md h-auto object-cover rounded-lg"
                 onerror="this.src='{{ asset('images/PlaceHolder2.jpg') }}'">
         </div>
 
