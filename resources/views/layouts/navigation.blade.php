@@ -24,6 +24,11 @@
                         {{ __('Add Event') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('events.admin')" :active="request()->routeIs('events.admin')">
+                        {{ __('Admin') }}
+                    </x-nav-link>
+
+
 
                 </div>
 
