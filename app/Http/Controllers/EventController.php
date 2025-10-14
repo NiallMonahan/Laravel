@@ -102,6 +102,18 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        // Only delete the image if it's a real uploaded file, not a shared placeholder
+        if (
+            $event->image
+            && file_exists(public_path($event->image))
+            && !str_contains($event->image, 'placeholder')
+        ) {
+
+            unlink(public_path($event->image));
+        }
+
+        $event->delete();
+
+        return redirect()->route('events.index')->with('success', 'Event deleted.');
     }
 }
