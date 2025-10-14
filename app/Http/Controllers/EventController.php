@@ -70,7 +70,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        return view('events.edit', compact('event'));
     }
 
     /**
@@ -78,7 +78,23 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        //
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string', 'max:1000'],
+            'event_date' => ['required', 'date'],
+            'location' => ['required', 'string', 'max:255'],
+            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
+        ]);
+
+        // Only replace the image if a new one was uploaded
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('images/events', 'public'); // storage/app/public/images/events
+            $validated['image'] = 'storage/' . $path; // so asset($event->image) works
+        }
+
+        $event->update($validated);
+
+        return redirect()->route('events.index')->with('success', 'Event Updated Successfully');
     }
 
     /**
