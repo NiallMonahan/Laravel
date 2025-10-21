@@ -64,7 +64,7 @@ class EventSeeder extends Seeder
             'Blast'
         ];
 
-        foreach (range(1, 18) as $index) {
+        foreach (range(1, 50) as $index) {
             $title = $faker->randomElement($adjectives) . ' ' .
                 $faker->randomElement($nouns) . ' ' .
                 $faker->randomElement($partySynonyms);

@@ -1,34 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* ↓ Add from here down */
-@layer base {
-  html { color-scheme: dark; }
-  body { @apply bg-slate-950 text-slate-100; }
-
-  header, nav, footer, .shadow, .shadow-sm, .shadow-md, .shadow-lg, .rounded-2xl, .card {
-    @apply bg-slate-900;
-  }
-
-  .border, .border-slate-200, .border-gray-200 { @apply border-slate-700; }
-
-  a { @apply text-indigo-400; }
-  a:hover { @apply text-indigo-300; }
-
-  button, .btn, .btn-primary, [type="submit"] { @apply bg-indigo-600 text-white hover:bg-indigo-500; }
-
-  input, textarea, select {
-    @apply bg-slate-900 text-slate-100 border border-slate-700 placeholder-slate-400;
-  }
-  input:focus, textarea:focus, select:focus {
-    @apply ring-2 ring-indigo-500 border-indigo-500 outline-none;
-  }
-
-  table { @apply text-slate-200; }
-  th, td { @apply border-slate-700; }
-}
-
-@layer components {
-  article { @apply bg-slate-900 border border-slate-700; }
-}
