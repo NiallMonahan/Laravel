@@ -43,7 +43,6 @@ class EventController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            // Follow Anne's method: move the file to the public folder
             $imageName = time() . '.' . $request->image->extension();
             $request->image->move(public_path('images/events'), $imageName);
             $validated['image'] = $imageName;

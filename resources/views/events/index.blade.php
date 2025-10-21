@@ -3,12 +3,16 @@
         All Events
     </h1>
 
-
+    <!--  Made the alert message dissapear after 2 seconds with javascript -->
     @if(session('success'))
-        <div class="mb-4 rounded-md bg-green-50 p-3 text-green-700">
+        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 2000)" x-show="show"
+            x-transition.opacity.duration.500ms
+            class="mb-4 rounded-md border border-green-700 bg-green-900/30 p-3 text-green-400 shadow-sm shadow-green-500/20">
             {{ session('success') }}
         </div>
     @endif
+
+
 
     @if($events->isEmpty())
         <p class="text-gray-600">No events found.</p>
