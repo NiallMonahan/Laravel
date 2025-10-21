@@ -10,7 +10,7 @@
     @if($events->isEmpty())
         <p class="text-gray-600">No events found.</p>
     @else
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1600px] mx-auto">
             @foreach($events as $event)
                 <div class="space-y-3">
                     <x-event-card :title="$event->title" :description="$event->description" :image="$event->image"
