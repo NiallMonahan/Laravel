@@ -7,7 +7,7 @@
     @if(session('success'))
         <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 2000)" x-show="show"
             x-transition.opacity.duration.500ms
-            class="mb-4 rounded-md border border-green-700 bg-green-900/30 p-3 text-green-400 shadow-sm shadow-green-500/20">
+            class="mb-4 rounded-md border border-green-700 bg-green-900/30 p-3 text-green-400 shadow-sm shadow-green-500/20 max-w-[1600px] mx-auto">
             {{ session('success') }}
         </div>
     @endif
