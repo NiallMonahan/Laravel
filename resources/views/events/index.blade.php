@@ -1,7 +1,11 @@
 <x-app-layout>
-    <h1 class="text-2xl font-bold mb-6 bg-gradient-to-r from-pink-500 to-indigo-400 bg-clip-text text-transparent">
-        All Events
-    </h1>
+    <!--Title  -->
+    <div class="max-w-[1600px] mx-auto px-4 text-center py-8">
+        <h1
+            class="text-4xl font-extrabold bg-gradient-to-r from-pink-500 to-indigo-400 bg-clip-text text-transparent tracking-tight">
+            All Events
+        </h1>
+    </div>
 
     <!--  Made the alert message dissapear after 2 seconds with javascript -->
     @if(session('success'))
@@ -28,7 +32,7 @@
 
 
 
-
+    <!-- Event List -->
     @if($events->isEmpty())
         <p class="text-gray-600">No events found.</p>
     @else
