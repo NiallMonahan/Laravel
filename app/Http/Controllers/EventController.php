@@ -10,14 +10,24 @@ class EventController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Fetch all events from the database
-        $events = Event::all();
+        // Get the search input (if any)
+        $search = $request->input('search');
+
+        // Fetch all events from the database (filtered if search is provided)
+        if ($search) {
+            $events = Event::where('title', 'like', "%{$search}%")
+                ->orWhere('description', 'like', "%{$search}%")
+                ->get();
+        } else {
+            $events = Event::all();
+        }
 
         // Send the events to the index view
         return view('events.index', compact('events'));
     }
+
 
 
     /**

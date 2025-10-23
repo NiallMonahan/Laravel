@@ -13,6 +13,21 @@
     @endif
 
 
+    <!-- Search bar -->
+    <div class="max-w-[1600px] mx-auto px-4">
+        <form action="{{ route('events.index') }}" method="GET" class="flex items-center gap-2 mb-6">
+            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search events..." class="w-full bg-gray-800 text-gray-100 border border-gray-800 
+                   rounded-xl px-4 py-2 focus:outline-none focus:ring-2 
+                   focus:ring-pink-500/40 placeholder-gray-400 transition">
+            <button type="submit" class="bg-pink-600 hover:bg-pink-700 text-gray-100 font-semibold 
+                   px-4 py-2 rounded-xl transition hover:shadow-pink-500/30">
+                Search
+            </button>
+        </form>
+    </div>
+
+
+
 
     @if($events->isEmpty())
         <p class="text-gray-600">No events found.</p>

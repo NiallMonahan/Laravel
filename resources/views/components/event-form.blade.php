@@ -69,7 +69,7 @@
 
     @if($event?->image)
       <div class="mt-3 inline-flex items-center gap-3 rounded-lg border border-gray-800 bg-gray-900 p-2">
-        <img src="{{ asset($event->image) }}" alt="Event image"
+        <img src="{{ asset("images/events/" . $event->image) }}" alt="Event image"
              class="h-20 w-20 rounded object-cover ring-1 ring-gray-700">
         <span class="text-sm text-gray-300">Current image</span>
       </div>
