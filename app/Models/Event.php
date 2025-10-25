@@ -9,7 +9,7 @@ class Event extends Model
 {
     use HasFactory;
 
-    // Allow these attributes to be mass-assigned
+    // These are the fields we actually want to fill in one go
     protected $fillable = [
         'title',
         'description',

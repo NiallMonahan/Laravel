@@ -12,10 +12,10 @@ class EventController extends Controller
      */
     public function index(Request $request)
     {
-        // Get the search input (if any)
+        // Grab whatever the user typed in the search bar
         $search = $request->input('search');
 
-        // Fetch all events from the database (filtered if search is provided)
+        // If we actually have a search word, try to match it against title or description
         if ($search) {
             $events = Event::where('title', 'like', "%{$search}%")
                 ->orWhere('description', 'like', "%{$search}%")
@@ -24,7 +24,7 @@ class EventController extends Controller
             $events = Event::all();
         }
 
-        // Send the events to the index view
+        // Hand the events to the blade view so it can list them out
         return view('events.index', compact('events'));
     }
 
@@ -52,6 +52,7 @@ class EventController extends Controller
             'image' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
         ]);
 
+        // Deal with the uploaded picture if the user sent one
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
             $request->image->move(public_path('images/events'), $imageName);
@@ -69,7 +70,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        // Laravel automatically finds the event by ID (implicit model binding)
+        // Laravel auto-grabs the event for us thanks to route model binding
         return view('events.show', compact('event'));
     }
 
