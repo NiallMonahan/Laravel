@@ -22,16 +22,6 @@
                         {{ __('View All Events') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('events.create')" :active="request()->routeIs('events.create')"
-                        class="text-gray-300 hover:text-pink-400 border-b-2 border-transparent hover:border-pink-400 {{ request()->routeIs('events.create') ? 'text-pink-500 border-pink-500 font-semibold' : '' }}">
-                        {{ __('Add Event') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('events.admin')" :active="request()->routeIs('events.admin')"
-                        class="text-gray-300 hover:text-pink-400 border-b-2 border-transparent hover:border-pink-400 {{ request()->routeIs('events.admin') ? 'text-pink-500 border-pink-500 font-semibold' : '' }}">
-                        {{ __('Admin') }}
-                    </x-nav-link>
-
                     <!-- create link only appears for admin users -->
                     @auth
                         @if (auth()->user()->role === 'admin')
