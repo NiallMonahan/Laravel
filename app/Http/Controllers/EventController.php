@@ -35,9 +35,15 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('events.create');
+        if (auth()->user()->role !== 'admin') {
+            return redirect()
+                ->route('events.index')
+                ->with('error', 'Access denied.');
+        }
 
+        return view('events.create');
     }
+
 
     /**
      * Store a newly created resource in storage.
