@@ -25,10 +25,12 @@
                     <!-- create link only appears for admin users -->
                     @auth
                         @if (auth()->user()->role === 'admin')
-                            <x-nav-link :href="route('events.create')" :active="request()->routeIs('events.create')">
+                            <x-nav-link :href="route('events.create')" :active="request()->routeIs('events.create')"
+                                class="text-gray-300 hover:text-pink-400 border-b-2 border-transparent hover:border-pink-400 {{ request()->routeIs('events.create') ? 'text-pink-500 border-pink-500 font-semibold' : '' }}">
                                 {{ __('Create New Event') }}
                             </x-nav-link>
                         @endif
+
                     @endauth
                 </div>
 
