@@ -76,9 +76,13 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        // Laravel auto-grabs the event for us thanks to route model binding
+        // Get the event and all its related tickets
+        $event->load('tickets');
+
+        // Pass the event (with tickets) to the view
         return view('events.show', compact('event'));
     }
+
 
 
     /**
