@@ -17,4 +17,9 @@ class Event extends Model
         'location',
         'image',
     ];
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
 }
