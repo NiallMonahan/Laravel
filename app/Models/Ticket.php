@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
 {
+    protected $fillable = [
+        'event_id',
+        'holder_name',
+        'seat_number',
+        'price',
+    ];
+
     public function event()
     {
         return $this->belongsTo(Event::class);
@@ -15,5 +22,4 @@ class Ticket extends Model
     {
         return $this->belongsTo(User::class);
     }
-
 }
