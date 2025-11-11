@@ -28,7 +28,19 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate incoming data
+        $validated = $request->validate([
+            'event_id' => 'required|exists:events,id',
+            'holder_name' => 'required|string|max:255',
+            'seat_number' => 'nullable|string|max:50',
+            'price' => 'required|numeric|min:0',
+        ]);
+
+        // Create the new ticket
+        Ticket::create($validated);
+
+        // Return to the previous page (Event show) with a success message
+        return back()->with('success', 'Ticket added successfully!');
     }
 
     /**
