@@ -32,6 +32,12 @@
                                     Delete
                                 </button>
                             </form>
+
+                            <a href="{{ route('tickets.edit', $ticket) }}"
+                                class="inline-flex items-center justify-center rounded-md bg-pink-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-pink-500 shadow-sm hover:shadow-pink-500/30 transition">
+                                Edit
+                            </a>
+
                         </li>
                     @endforeach
                 </ul>
