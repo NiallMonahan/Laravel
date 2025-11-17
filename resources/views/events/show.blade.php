@@ -22,21 +22,23 @@
                                 <span class="text-pink-400 font-medium">(€{{ number_format($ticket->price, 2) }})</span>
                             </div>
 
-                            {{-- Delete button --}}
-                            <form action="{{ route('tickets.destroy', $ticket) }}" method="POST" class="inline"
-                                onsubmit="return confirm('Are you sure you want to delete this ticket?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm transition duration-200 focus:outline-none focus:ring-2 focus:ring-red-500">
-                                    Delete
-                                </button>
-                            </form>
+                            {{-- Action buttons grouped together --}}
+                            <div class="flex items-center gap-2">
+                                <a href="{{ route('tickets.edit', $ticket) }}"
+                                    class="inline-flex items-center justify-center rounded-md bg-pink-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-pink-500 shadow-sm hover:shadow-pink-500/30 transition">
+                                    Edit
+                                </a>
 
-                            <a href="{{ route('tickets.edit', $ticket) }}"
-                                class="inline-flex items-center justify-center rounded-md bg-pink-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-pink-500 shadow-sm hover:shadow-pink-500/30 transition">
-                                Edit
-                            </a>
+                                <form action="{{ route('tickets.destroy', $ticket) }}" method="POST" class="inline"
+                                    onsubmit="return confirm('Are you sure you want to delete this ticket?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded text-sm transition duration-200 focus:outline-none focus:ring-2 focus:ring-red-500">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
 
                         </li>
                     @endforeach
