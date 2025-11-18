@@ -75,8 +75,10 @@ class TicketController extends Controller
         // Update the ticket
         $ticket->update($validated);
 
-        // Return to the previous page (Event show) with a success message
-        return back()->with('success', 'Ticket updated successfully!');
+        $event = $ticket->event;
+
+        return redirect()->route('events.show', $ticket->event)->with('success', 'Ticket updated successfully!');
+
     }
 
     /**
