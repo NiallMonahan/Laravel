@@ -5,6 +5,9 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+use App\Models\Event;
+use App\Models\Artist;
+
 
 class EventSeeder extends Seeder
 {
@@ -69,7 +72,7 @@ class EventSeeder extends Seeder
                 $faker->randomElement($nouns) . ' ' .
                 $faker->randomElement($partySynonyms);
 
-            DB::table('events')->insert([
+            $event = Event::create([
                 'title' => $title,
                 'description' => $faker->paragraph,
                 'event_date' => $faker->dateTimeBetween('+1 week', '+1 year'),
@@ -79,6 +82,14 @@ class EventSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
+
+            // Attach artists
+            $event->artists()->attach(Artist::inRandomOrder()->take(2)->pluck('id'));
+
+
         }
+
+
+
     }
 }

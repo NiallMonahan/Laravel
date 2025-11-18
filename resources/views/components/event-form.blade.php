@@ -89,4 +89,15 @@
       Cancel
     </a>
   </div>
+
+  <label class="block text-sm text-gray-200">Artists</label>
+<select name="artists[]" multiple class="w-full bg-gray-800 text-gray-200">
+    @foreach($artists as $artist)
+        <option value="{{ $artist->id }}" 
+            @if(isset($event) && $event->artists->contains($artist->id)) selected @endif>
+            {{ $artist->name }}
+        </option>
+    @endforeach
+</select>
+
 </form>

@@ -67,7 +67,11 @@ class EventController extends Controller
 
         Event::create($validated);
 
+
         return redirect()->route('events.index')->with('success', 'Event created successfully!');
+
+        $event->artists()->attach($request->artists);
+
     }
 
 
@@ -115,6 +119,9 @@ class EventController extends Controller
         $event->update($validated);
 
         return redirect()->route('events.index')->with('success', 'Event Updated Successfully');
+
+        $event->artists()->sync($request->artists);
+
     }
 
     /**

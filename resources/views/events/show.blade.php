@@ -48,5 +48,13 @@
             @endif
         </div>
         <x-ticket-form :event="$event" />
+        <h2 class="text-xl text-white font-bold mt-6 mb-2">Artists</h2>
+
+        <ul class="space-y-1">
+            @foreach($event->artists as $artist)
+                <li class="text-gray-300">{{ $artist->name }}</li>
+            @endforeach
+        </ul>
+
     </div>
 </x-app-layout>
