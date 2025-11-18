@@ -1,7 +1,5 @@
 @props([
-    'name',
-    'bio' => null,
-    'image' => null,
+    'artist',
 ])
 
 <div class="group rounded-2xl border border-gray-800 bg-gray-900 p-5 shadow-md hover:shadow-xl transition duration-300
@@ -10,21 +8,21 @@
     {{-- Artist Image --}}
     <div class="w-32 h-32 mb-4 overflow-hidden rounded-full border border-gray-700 group-hover:border-pink-500 transition">
         <img 
-            src="{{ $image ? asset('images/artists/' . $image) : asset('images/placeholder.png') }}"
-            alt="{{ $name }}"
+            src="{{ $artist->image ? asset('images/artists/' . $artist->image) : asset('images/placeholder.png') }}"
+            alt="{{ $artist->name }}"
             class="w-full h-full object-cover"
         >
     </div>
 
     {{-- Artist Name --}}
     <h2 class="text-lg font-semibold text-gray-100 group-hover:text-pink-400 transition">
-        {{ $name }}
+        {{ $artist->name }}
     </h2>
 
     {{-- Bio (shortened automatically) --}}
-    @if($bio)
+    @if($artist->bio)
         <p class="text-sm text-gray-400 mt-2 line-clamp-3">
-            {{ $bio }}
+            {{ $artist->bio }}
         </p>
     @endif
 
