@@ -8,6 +8,7 @@ use App\Http\Controllers\ArtistController;
 
 
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -45,6 +46,9 @@ Route::middleware('auth')->group(function () {
 
     // Artist routes
     Route::resource('artists', ArtistController::class)->middleware('auth');
+    Route::resource('artists', ArtistController::class);
+
+
 
 });
 
