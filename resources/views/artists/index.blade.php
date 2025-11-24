@@ -6,6 +6,15 @@
     </x-slot>
 
     <div class="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <p>Artists index page works!</p>
+        @if($artists->count())
+            <ul>
+                @foreach($artists as $artist)
+                    <li>{{ $artist->name }}</li>
+                @endforeach
+            </ul>
+        @else
+            <p>No artists found.</p>
+        @endif
+
     </div>
 </x-app-layout>

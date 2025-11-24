@@ -12,7 +12,9 @@ class ArtistController extends Controller
      */
     public function index()
     {
-        return view('artists.index', ['artists' => Artist::all()]);
+        $artists = \App\Models\Artist::all();
+
+        return view('artists.index', compact('artists'));
     }
 
     /**
