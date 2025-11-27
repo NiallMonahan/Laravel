@@ -7,7 +7,7 @@ $img_url = asset('images/artists/' . strtolower(preg_replace('/[ !-]/', '_', $ar
 @endphp
 
 <div class="group rounded-2xl border border-gray-800 bg-gray-900 p-5 shadow-md hover:shadow-xl transition duration-300
-            hover:border-pink-500 cursor-pointer flex flex-col items-center text-center">
+            hover:border-pink-500 cursor-pointer flex flex-col items-center text-center mt-6">
 
     {{-- Artist Image --}}
     <div class="w-32 h-32 mb-4 overflow-hidden rounded-full border border-gray-700 group-hover:border-pink-500 transition">
