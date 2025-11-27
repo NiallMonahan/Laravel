@@ -34,6 +34,11 @@
                                 class="text-gray-300 hover:text-pink-400 border-b-2 border-transparent hover:border-pink-400 {{ request()->routeIs('events.create') ? 'text-pink-500 border-pink-500 font-semibold' : '' }}">
                                 {{ __('Create New Event') }}
                             </x-nav-link>
+
+                            <x-nav-link :href="route('artists.create')" :active="request()->routeIs('artists.create')"
+                                class="text-gray-300 hover:text-pink-400 border-b-2 border-transparent hover:border-pink-400 {{ request()->routeIs('artists.create') ? 'text-pink-500 border-pink-500 font-semibold' : '' }}">
+                                {{ __('Create New Artist') }}
+                            </x-nav-link>
                         @endif
 
                     @endauth
@@ -119,6 +124,11 @@
                 <x-responsive-nav-link :href="route('events.admin')" :active="request()->routeIs('events.admin')"
                     class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-gray-300 hover:text-pink-400 hover:bg-gray-800 hover:border-pink-400 {{ request()->routeIs('events.admin') ? 'text-pink-500 border-pink-500 font-semibold bg-gray-800' : '' }}">
                     {{ __('Admin') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('artists.create')" :active="request()->routeIs('artists.create')"
+                    class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-gray-300 hover:text-pink-400 hover:bg-gray-800 hover:border-pink-400 {{ request()->routeIs('artists.create') ? 'text-pink-500 border-pink-500 font-semibold bg-gray-800' : '' }}">
+                    {{ __('Add Artist') }}
                 </x-responsive-nav-link>
             </div>
 

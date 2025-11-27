@@ -22,7 +22,13 @@ class ArtistController extends Controller
      */
     public function create()
     {
-        //
+        if (auth()->user()->role !== 'admin') {
+            return redirect()
+                ->route('artists.index')
+                ->with('error', 'Access denied.');
+        }
+
+        return view('artists.create');
     }
 
     /**
@@ -30,7 +36,7 @@ class ArtistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
