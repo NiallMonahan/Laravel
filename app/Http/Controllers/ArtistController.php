@@ -36,7 +36,17 @@ class ArtistController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'bio' => 'nullable|string',
+        ]);
 
+        Artist::create([
+            'name' => $request->name,
+            'bio' => $request->bio,
+        ]);
+
+        return redirect()->route('artists.index')->with('success', 'Artist created successfully!');
     }
 
     /**

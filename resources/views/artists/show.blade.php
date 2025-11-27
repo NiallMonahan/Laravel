@@ -1,34 +1,9 @@
 <x-app-layout>
     <div class="py-8">
+        <x-artist-details :name="$artist->name" :genre="$artist->genre" :bio="$artist->bio"
+            :image="asset('images/artists/' . strtolower(preg_replace('/[ !-]/', '_', $artist->name)) . '.jpg')" />
+
         <div class="max-w-xl mx-auto">
-            <!-- Artist Details -->
-            <div
-                class="border border-gray-800 rounded-2xl shadow-md p-6 bg-gray-900 hover:shadow-pink-500/20 transition duration-300 mb-6">
-                <div class="flex flex-col items-center text-center gap-6">
-                    <!-- Artist Name -->
-                    <h1 class="text-4xl font-extrabold text-white mb-4">
-                        {{ $artist->name }}
-                    </h1>
-
-                    <!-- Artist Image -->
-                    <div class="w-48 h-48 rounded-lg overflow-hidden border-4 border-pink-500 shadow-lg">
-                        <img src="{{ asset('images/artists/' . strtolower(preg_replace('/[ !-]/', '_', $artist->name)) . '.jpg') }}"
-                            alt="{{ $artist->name }}" class="w-full h-full object-cover">
-                    </div>
-
-                    <!-- Artist Info -->
-                    <div>
-                        <div
-                            class="inline-block bg-pink-500 text-white px-4 py-2 rounded-full text-lg font-semibold mb-4">
-                            {{ $artist->genre }}
-                        </div>
-                        <p class="text-gray-300 text-lg leading-relaxed">
-                            {{ $artist->bio }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-
             <!-- Events section -->
             <div
                 class="border border-gray-800 rounded-2xl shadow-md p-6 bg-gray-900 hover:shadow-pink-500/20 transition duration-300 mb-6">
