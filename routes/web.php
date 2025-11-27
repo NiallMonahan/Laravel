@@ -47,8 +47,7 @@ Route::middleware('auth')->group(function () {
     // Artist routes
     Route::resource('artists', ArtistController::class)->middleware('auth');
     Route::resource('artists', ArtistController::class);
-
-
+    Route::get('/artists/{artist}', [ArtistController::class, 'show'])->name('artists.show');
 
 });
 
