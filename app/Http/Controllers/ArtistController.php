@@ -38,13 +38,22 @@ class ArtistController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            // 'genre' => 'required|string|max:255',
             'bio' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        Artist::create([
+        $artist = Artist::create([
             'name' => $request->name,
+            // 'genre' => $request->genre,
             'bio' => $request->bio,
         ]);
+
+        // Handle image upload with naming convention
+        if ($request->hasFile('image')) {
+            $imageName = strtolower(preg_replace('/[ !-]/', '_', $artist->name)) . '.jpg';
+            $request->file('image')->move(public_path('images/artists'), $imageName);
+        }
 
         return redirect()->route('artists.index')->with('success', 'Artist created successfully!');
     }

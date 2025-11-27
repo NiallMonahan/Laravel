@@ -43,6 +43,17 @@
     @error('bio') <p class="mt-1 text-sm text-red-400">{{ $message }}</p> @enderror
   </div>
 
+  {{-- Image --}}
+  <div>
+    <label for="image" class="mb-1 block text-sm font-semibold text-gray-200">Image</label>
+    <input id="image" type="file" name="image" accept="image/*"
+           class="w-full rounded-lg border border-gray-700 bg-gray-800 p-2.5 text-gray-100 
+                  file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 
+                  file:text-sm file:font-semibold file:bg-pink-50 file:text-pink-700 
+                  hover:file:bg-pink-100">
+    @error('image') <p class="mt-1 text-sm text-red-400">{{ $message }}</p> @enderror
+  </div>
+
   {{-- Actions --}}
   <div class="flex items-center gap-3">
     <button type="submit"
