@@ -22,6 +22,11 @@
                         {{ __('View All Events') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('artists.index')" :active="request()->routeIs('artists.index')"
+                        class="text-gray-300 hover:text-pink-400 border-b-2 border-transparent hover:border-pink-400 {{ request()->routeIs('artists.index') ? 'text-pink-500 border-pink-500 font-semibold' : '' }}">
+                        {{ __('View All Artists') }}
+                    </x-nav-link>
+
                     <!-- create link only appears for admin users -->
                     @auth
                         @if (auth()->user()->role === 'admin')
@@ -99,6 +104,11 @@
                 <x-responsive-nav-link :href="route('events.index')" :active="request()->routeIs('events.index')"
                     class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-gray-300 hover:text-pink-400 hover:bg-gray-800 hover:border-pink-400 {{ request()->routeIs('events.index') ? 'text-pink-500 border-pink-500 font-semibold bg-gray-800' : '' }}">
                     {{ __('View All Events') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('artists.index')" :active="request()->routeIs('artists.index')"
+                    class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-gray-300 hover:text-pink-400 hover:bg-gray-800 hover:border-pink-400 {{ request()->routeIs('artists.index') ? 'text-pink-500 border-pink-500 font-semibold bg-gray-800' : '' }}">
+                    {{ __('View All Artists') }}
                 </x-responsive-nav-link>
 
                 <x-responsive-nav-link :href="route('events.create')" :active="request()->routeIs('events.create')"
