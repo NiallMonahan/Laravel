@@ -25,9 +25,10 @@ $img_url = asset('images/artists/' . strtolower(preg_replace('/[ !-]/', '_', $ar
 
     {{-- Bio (shortened automatically) --}}
     @if($artist->bio)
-        <p class="text-sm text-gray-400 mt-2 line-clamp-3">
-            {{ $artist->bio }}
-        </p>
+        {{-- More Info Button --}}
+        <a href="{{ route('artists.show', $artist) }}" class="text-sm text-pink-400 hover:text-pink-300 mt-2 transition">
+            More Info
+        </a>
     @endif
 
 </div>

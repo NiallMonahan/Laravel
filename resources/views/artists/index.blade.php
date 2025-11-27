@@ -13,13 +13,11 @@
         <p class="text-gray-600">No artists found.</p>
     @else
         <div class="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <ul>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                 @foreach($artists as $artist)
-                    <div class="space-y-3">
-                        <x-artist-card :artist="$artist" />
-                    </div>
+                    <x-artist-card :artist="$artist" />
                 @endforeach
-            </ul>
+            </div>
         </div>
     @endif
 </x-app-layout>
