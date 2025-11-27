@@ -4,7 +4,7 @@
   'artist'  => null,
 ])
 
-<form action="{{ $action }}" method="POST" 
+<form action="{{ $action }}" method="POST" enctype="multipart/form-data"
       class="space-y-5 rounded-2xl border border-gray-800 bg-gray-900 p-6 shadow-md">
   @csrf
   @if(in_array($method, ['PUT','PATCH','DELETE']))
