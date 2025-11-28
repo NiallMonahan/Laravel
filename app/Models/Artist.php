@@ -9,6 +9,7 @@ class Artist extends Model
     protected $fillable = [
         'name',
         'bio',
+        'genre',
     ];
 
     public function events()
