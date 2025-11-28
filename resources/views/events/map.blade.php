@@ -66,15 +66,14 @@
                         iconAnchor: [12, 12]
                     });
 
-                    // Create popup content
+                    // Create compact popup content
                     const artistsList = event.artists.map(artist => artist.name).join(', ');
                     const popupContent = `
-                        <div class="text-gray-800">
-                            <h3 class="font-bold text-lg mb-2">${event.title}</h3>
-                            <p class="text-sm mb-1"><strong>Location:</strong> ${event.location}</p>
-                            <p class="text-sm mb-1"><strong>Date:</strong> ${event.event_date}</p>
-                            ${artistsList ? `<p class="text-sm mb-2"><strong>Artists:</strong> ${artistsList}</p>` : ''}
-                            <a href="/events/${event.id}" class="inline-block bg-pink-600 text-white px-3 py-1 rounded text-sm hover:bg-pink-700 transition">
+                        <div class="bg-gray-900 text-gray-100 p-3 rounded-lg border border-gray-800">
+                            <h3 class="font-semibold text-pink-400 mb-2">${event.title}</h3>
+                            <p class="text-xs text-gray-300 mb-1">${event.location} • ${event.event_date}</p>
+                            ${artistsList ? `<p class="text-xs text-gray-400 mb-2">${artistsList}</p>` : ''}
+                            <a href="/events/${event.id}" class="inline-block bg-pink-600 hover:bg-pink-700 text-white px-2 py-1 rounded text-xs transition">
                                 View Details
                             </a>
                         </div>
@@ -84,8 +83,10 @@
                     L.marker([event.latitude, event.longitude], { icon: pinkIcon })
                         .addTo(map)
                         .bindPopup(popupContent, {
-                            maxWidth: 300,
-                            className: 'custom-popup'
+                            maxWidth: 250,
+                            className: 'custom-popup',
+                            closeButton: true,
+                            autoPan: true
                         });
                 }
             });
@@ -103,13 +104,35 @@
     <!-- Custom CSS for popup styling -->
     <style>
         .custom-popup .leaflet-popup-content-wrapper {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            background: transparent !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
         }
 
         .custom-popup .leaflet-popup-tip {
-            background: white;
+            background: #1f2937 !important;
+            border: 1px solid #374151 !important;
+        }
+
+        .custom-popup .leaflet-popup-close-button {
+            color: #ec4899 !important;
+            background: #1f2937 !important;
+            border-radius: 50% !important;
+            width: 20px !important;
+            height: 20px !important;
+            right: 5px !important;
+            top: 5px !important;
+        }
+
+        .custom-popup .leaflet-popup-close-button:hover {
+            background: #374151 !important;
+        }
+
+        .custom-popup .leaflet-popup-content {
+            margin: 0 !important;
+            padding: 0 !important;
         }
     </style>
 </x-app-layout>
