@@ -6,6 +6,8 @@
 
 @php
 $artists = \App\Models\Artist::all();
+// Gets selected artists as an array for editing
+$selectedArtists = $event ? $event->artists->pluck('id')->toArray() : [];
 @endphp
 
 <form action="{{ $action }}" method="POST" enctype="multipart/form-data"
@@ -32,7 +34,7 @@ $artists = \App\Models\Artist::all();
     <textarea id="description" name="description" rows="4"
               class="w-full rounded-lg border border-gray-700 bg-gray-800 p-2.5 text-gray-100 placeholder-gray-400
                      focus:border-pink-500 focus:ring-2 focus:ring-pink-500/40 transition"
-              placeholder="What’s happening? When, who, why?">{{ old('description', $event->description ?? '') }}</textarea>
+              placeholder="What's happening? When, who, why?">{{ old('description', $event->description ?? '') }}</textarea>
     @error('description') <p class="mt-1 text-sm text-red-400">{{ $message }}</p> @enderror
   </div>
 
@@ -59,6 +61,33 @@ $artists = \App\Models\Artist::all();
            placeholder="Venue or address"
            value="{{ old('location', $event->location ?? '') }}" required>
     @error('location') <p class="mt-1 text-sm text-red-400">{{ $message }}</p> @enderror
+  </div>
+
+  {{-- Artists Selection --}}
+  <div>
+    <label class="mb-3 block text-sm font-semibold text-gray-200">Select Artists</label>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-48 overflow-y-auto border border-gray-700 rounded-lg p-3 bg-gray-800">
+      @if($artists->isEmpty())
+        <p class="text-gray-400 text-sm col-span-2 text-center py-4">No artists available. <a href="{{ route('artists.create') }}" class="text-pink-400 hover:text-pink-300 underline">Create one first</a></p>
+      @else
+        @foreach($artists as $artist)
+          <label class="flex items-center space-x-3 cursor-pointer hover:bg-gray-700 p-2 rounded transition">
+            <input type="checkbox" 
+                   name="artists[]" 
+                   value="{{ $artist->id }}"
+                   {{ in_array($artist->id, old('artists', $selectedArtists)) ? 'checked' : '' }}
+                   class="w-4 h-4 text-pink-600 bg-gray-800 border-gray-600 rounded focus:ring-pink-500 focus:ring-2">
+            <div class="flex-1">
+              <div class="text-sm font-medium text-gray-100">{{ $artist->name }}</div>
+              @if($artist->genre)
+                <div class="text-xs text-gray-400">{{ $artist->genre }}</div>
+              @endif
+            </div>
+          </label>
+        @endforeach
+      @endif
+    </div>
+    @error('artists') <p class="mt-1 text-sm text-red-400">{{ $message }}</p> @enderror
   </div>
 
   {{-- Image --}}
@@ -93,15 +122,4 @@ $artists = \App\Models\Artist::all();
       Cancel
     </a>
   </div>
-
-  <label class="block text-sm text-gray-200">Artists</label>
-<select name="artists[]" multiple class="w-full bg-gray-800 text-gray-200">
-    @foreach($artists as $artist)
-        <option value="{{ $artist->id }}" 
-            @if(isset($event) && $event->artists->contains($artist->id)) selected @endif>
-            {{ $artist->name }}
-        </option>
-    @endforeach
-</select>
-
 </form>
