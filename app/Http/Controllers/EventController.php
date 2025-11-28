@@ -56,6 +56,8 @@ class EventController extends Controller
             'event_date' => 'required|date',
             'location' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+            'artists' => 'array',
+            'artists.*' => 'exists:artists,id',
         ]);
 
         // Deal with the uploaded picture if the user sent one
@@ -65,29 +67,27 @@ class EventController extends Controller
             $validated['image'] = $imageName;
         }
 
-        Event::create($validated);
+        $event = Event::create($validated);
 
+        // Attach selected artists to the event
+        if (!empty($request->artists)) {
+            $event->artists()->attach($request->artists);
+        }
 
         return redirect()->route('events.index')->with('success', 'Event created successfully!');
-
-        $event->artists()->attach($request->artists);
-
     }
-
 
     /**
      * Display the specified resource.
      */
     public function show(Event $event)
     {
-        // Get the event and all its related tickets
-        $event->load('tickets');
+        // Get the event and all its related tickets and artists
+        $event->load('tickets', 'artists');
 
-        // Pass the event (with tickets) to the view
+        // Pass the event (with tickets and artists) to the view
         return view('events.show', compact('event'));
     }
-
-
 
     /**
      * Show the form for editing the specified resource.
@@ -108,6 +108,8 @@ class EventController extends Controller
             'event_date' => ['required', 'date'],
             'location' => ['required', 'string', 'max:255'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
+            'artists' => 'array',
+            'artists.*' => 'exists:artists,id',
         ]);
 
         // Only replace the image if a new one was uploaded
@@ -118,10 +120,14 @@ class EventController extends Controller
 
         $event->update($validated);
 
+        // Sync selected artists with the event
+        if (isset($request->artists)) {
+            $event->artists()->sync($request->artists);
+        } else {
+            $event->artists()->detach();
+        }
+
         return redirect()->route('events.index')->with('success', 'Event Updated Successfully');
-
-        $event->artists()->sync($request->artists);
-
     }
 
     /**
