@@ -38,14 +38,14 @@ class ArtistController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            // 'genre' => 'required|string|max:255',
+            'genre' => 'required|string|max:255',
             'bio' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $artist = Artist::create([
             'name' => $request->name,
-            // 'genre' => $request->genre,
+            'genre' => $request->genre,
             'bio' => $request->bio,
         ]);
 
@@ -79,7 +79,34 @@ class ArtistController extends Controller
      */
     public function update(Request $request, Artist $artist)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'bio' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'genre' => 'required|string|max:255',
+        ]);
+
+        $artist->update([
+            'name' => $request->name,
+            'bio' => $request->bio,
+            'genre' => $request->genre,
+        ]);
+
+        // Handle image upload with naming convention
+        if ($request->hasFile('image')) {
+            // Delete old image if it exists
+            $oldImageName = strtolower(preg_replace('/[ !-]/', '_', $artist->getOriginal('name'))) . '.jpg';
+            $oldImagePath = public_path('images/artists/' . $oldImageName);
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath);
+            }
+
+            // Save new image with new name
+            $imageName = strtolower(preg_replace('/[ !-]/', '_', $artist->name)) . '.jpg';
+            $request->file('image')->move(public_path('images/artists'), $imageName);
+        }
+
+        return redirect()->route('artists.index')->with('success', 'Artist updated successfully!');
     }
 
     /**

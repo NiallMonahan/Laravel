@@ -20,9 +20,9 @@
 
             <!-- Artist Info -->
             <div>
-                <!-- <div class="inline-block bg-pink-500 text-white px-4 py-2 rounded-full text-lg font-semibold mb-4">
+                <div class="inline-block bg-pink-500 text-white px-4 py-2 rounded-full text-lg font-semibold mb-4">
                     {{ $genre }}
-                </div> -->
+                </div>
                 <p class="text-gray-300 text-lg leading-relaxed">
                     {{ $bio }}
                 </p>
