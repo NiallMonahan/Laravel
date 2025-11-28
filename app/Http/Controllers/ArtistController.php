@@ -59,7 +59,7 @@ class ArtistController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource.S
      */
     public function show(Artist $artist)
     {
@@ -71,7 +71,7 @@ class ArtistController extends Controller
      */
     public function edit(Artist $artist)
     {
-        //
+        return view('artists.edit', compact('artist'));
     }
 
     /**
@@ -87,6 +87,8 @@ class ArtistController extends Controller
      */
     public function destroy(Artist $artist)
     {
-        //
+        $artist->delete();
+
+        return redirect()->route('artists.index')->with('success', 'Artist deleted.');
     }
 }
