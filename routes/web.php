@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
 
     // Event routes
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
+    Route::get('/events/map', [EventController::class, 'map'])->name('events.map');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
     Route::post('/events', [EventController::class, 'store'])->name('events.store');
     Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
@@ -48,6 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('artists', ArtistController::class)->middleware('auth');
     Route::resource('artists', ArtistController::class);
     Route::get('/artists/{artist}', [ArtistController::class, 'show'])->name('artists.show');
+
 
 });
 
