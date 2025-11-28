@@ -149,4 +149,15 @@ class EventController extends Controller
 
         return redirect()->route('events.index')->with('success', 'Event deleted.');
     }
+
+
+    public function map()
+    {
+        $events = Event::whereNotNull('latitude')
+            ->whereNotNull('longitude')
+            ->with('artists')
+            ->get();
+
+        return view('events.map', compact('events'));
+    }
 }
