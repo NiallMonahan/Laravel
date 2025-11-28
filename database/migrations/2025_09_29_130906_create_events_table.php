@@ -17,6 +17,8 @@ return new class extends Migration {
             $table->text('description')->nullable(); // event details (optional)
             $table->date('event_date');           // date of the event
             $table->string('location');           // where the event is held
+            $table->decimal('latitude', 10, 7)->nullable();  // GPS latitude for map
+            $table->decimal('longitude', 10, 7)->nullable(); // GPS longitude for map
             $table->integer('capacity')->nullable(); // max attendees (optional)
             $table->string('image')->nullable();  // path/filename for event image
 
