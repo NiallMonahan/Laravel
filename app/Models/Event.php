@@ -15,8 +15,11 @@ class Event extends Model
         'description',
         'event_date',
         'location',
+        'latitude',
+        'longitude',
         'image',
     ];
+
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
@@ -26,5 +29,4 @@ class Event extends Model
     {
         return $this->belongsToMany(Artist::class);
     }
-
 }

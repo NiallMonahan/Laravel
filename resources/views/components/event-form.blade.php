@@ -63,6 +63,29 @@ $selectedArtists = $event ? $event->artists->pluck('id')->toArray() : [];
     @error('location') <p class="mt-1 text-sm text-red-400">{{ $message }}</p> @enderror
   </div>
 
+  {{-- Coordinates --}}
+  <div class="grid grid-cols-2 gap-4">
+    <div>
+      <label for="latitude" class="mb-1 block text-sm font-semibold text-gray-200">Latitude</label>
+      <input id="latitude" type="number" step="0.0000001" name="latitude"
+             class="w-full rounded-lg border border-gray-700 bg-gray-800 p-2.5 text-gray-100 placeholder-gray-400
+                    focus:border-pink-500 focus:ring-2 focus:ring-pink-500/40 transition"
+             placeholder="e.g. 53.3498"
+             value="{{ old('latitude', $event->latitude ?? '') }}">
+      @error('latitude') <p class="mt-1 text-sm text-red-400">{{ $message }}</p> @enderror
+    </div>
+
+    <div>
+      <label for="longitude" class="mb-1 block text-sm font-semibold text-gray-200">Longitude</label>
+      <input id="longitude" type="number" step="0.0000001" name="longitude"
+             class="w-full rounded-lg border border-gray-700 bg-gray-800 p-2.5 text-gray-100 placeholder-gray-400
+                    focus:border-pink-500 focus:ring-2 focus:ring-pink-500/40 transition"
+             placeholder="e.g. -6.2603"
+             value="{{ old('longitude', $event->longitude ?? '') }}">
+      @error('longitude') <p class="mt-1 text-sm text-red-400">{{ $message }}</p> @enderror
+    </div>
+  </div>
+
   {{-- Artists Selection --}}
   <div>
     <label class="mb-3 block text-sm font-semibold text-gray-200">Select Artists</label>
