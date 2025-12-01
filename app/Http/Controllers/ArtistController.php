@@ -12,6 +12,7 @@ class ArtistController extends Controller
      */
     public function index()
     {
+        // Retrieve all artists from the database
         $artists = \App\Models\Artist::all();
 
         return view('artists.index', compact('artists'));
@@ -22,6 +23,7 @@ class ArtistController extends Controller
      */
     public function create()
     {
+        // access to admins only 
         if (auth()->user()->role !== 'admin') {
             return redirect()
                 ->route('artists.index')
@@ -49,7 +51,6 @@ class ArtistController extends Controller
             'bio' => $request->bio,
         ]);
 
-        // Handle image upload with naming convention
         if ($request->hasFile('image')) {
             $imageName = strtolower(preg_replace('/[ !-]/', '_', $artist->name)) . '.jpg';
             $request->file('image')->move(public_path('images/artists'), $imageName);
@@ -59,10 +60,11 @@ class ArtistController extends Controller
     }
 
     /**
-     * Display the specified resource.S
+     * Display the specified resource.
      */
     public function show(Artist $artist)
     {
+        // Display the artist details page
         return view('artists.show', compact('artist'));
     }
 
@@ -71,6 +73,7 @@ class ArtistController extends Controller
      */
     public function edit(Artist $artist)
     {
+        // Load the edit form with existing artist data
         return view('artists.edit', compact('artist'));
     }
 
@@ -79,12 +82,14 @@ class ArtistController extends Controller
      */
     public function update(Request $request, Artist $artist)
     {
+
         $request->validate([
             'name' => 'required|string|max:255',
             'bio' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'genre' => 'required|string|max:255',
         ]);
+
 
         $artist->update([
             'name' => $request->name,
@@ -101,7 +106,7 @@ class ArtistController extends Controller
                 unlink($oldImagePath);
             }
 
-            // Save new image with new name
+            // Save new image with updated name
             $imageName = strtolower(preg_replace('/[ !-]/', '_', $artist->name)) . '.jpg';
             $request->file('image')->move(public_path('images/artists'), $imageName);
         }
@@ -114,6 +119,7 @@ class ArtistController extends Controller
      */
     public function destroy(Artist $artist)
     {
+        // Delete the artist from the database
         $artist->delete();
 
         return redirect()->route('artists.index')->with('success', 'Artist deleted.');

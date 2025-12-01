@@ -56,7 +56,10 @@ class TicketController extends Controller
      */
     public function edit(Ticket $ticket)
     {
+        // Get the event associated with this ticket
         $event = $ticket->event;
+
+        // Pass both ticket and event to the edit view
         return view('tickets.edit', compact('ticket', 'event'));
     }
 
@@ -65,20 +68,18 @@ class TicketController extends Controller
      */
     public function update(Request $request, Ticket $ticket)
     {
-        // Validate incoming data
         $validated = $request->validate([
             'holder_name' => 'required|string|max:255',
             'seat_number' => 'nullable|string|max:50',
             'price' => 'required|numeric|min:0',
         ]);
 
-        // Update the ticket
         $ticket->update($validated);
 
         $event = $ticket->event;
 
+        // Redirect back to the event details page showing the updated ticket
         return redirect()->route('events.show', $ticket->event)->with('success', 'Ticket updated successfully!');
-
     }
 
     /**
@@ -86,6 +87,7 @@ class TicketController extends Controller
      */
     public function destroy(Ticket $ticket)
     {
+        // Delete the ticket from the database
         $ticket->delete();
 
         return back()->with('success', 'Ticket deleted successfully!');

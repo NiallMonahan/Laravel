@@ -35,6 +35,7 @@ class EventController extends Controller
      */
     public function create()
     {
+        // Check if the current user has admin role - only admins can create events
         if (auth()->user()->role !== 'admin') {
             return redirect()
                 ->route('events.index')
@@ -50,6 +51,8 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+        // Validate all incoming form data
+        // latitude/longitude are optional but must be valid coordinates if provided
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
@@ -69,13 +72,16 @@ class EventController extends Controller
             $validated['image'] = $imageName;
         }
 
+        // Create the event record in the database
         $event = Event::create($validated);
 
-        // Attach selected artists to the event
+        // Attach selected artists to the event using the many-to-many relationship
+        // This creates records in the artist_event pivot table
         if (!empty($request->artists)) {
             $event->artists()->attach($request->artists);
         }
 
+        // Redirect back to events list with success message
         return redirect()->route('events.index')->with('success', 'Event created successfully!');
     }
 
@@ -96,6 +102,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
+        // Load the edit form view and pass the existing event data
         return view('events.edit', compact('event'));
     }
 
@@ -157,6 +164,7 @@ class EventController extends Controller
 
     public function map()
     {
+        // only events that have coordinates 
         $events = Event::whereNotNull('latitude')
             ->whereNotNull('longitude')
             ->with('artists')
