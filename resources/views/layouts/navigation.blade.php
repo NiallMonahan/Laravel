@@ -12,11 +12,6 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
-                        class="text-gray-300 hover:text-pink-400 border-b-2 border-transparent hover:border-pink-400 {{ request()->routeIs('dashboard') ? 'text-pink-500 border-pink-500 font-semibold' : '' }}">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-
                     <x-nav-link :href="route('events.index')" :active="request()->routeIs('events.index')"
                         class="text-gray-300 hover:text-pink-400 border-b-2 border-transparent hover:border-pink-400 {{ request()->routeIs('events.index') ? 'text-pink-500 border-pink-500 font-semibold' : '' }}">
                         {{ __('View All Events') }}
@@ -106,11 +101,6 @@
         <!-- Responsive Navigation Menu -->
         <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-gray-900 border-t border-gray-800">
             <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
-                    class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-gray-300 hover:text-pink-400 hover:bg-gray-800 hover:border-pink-400 {{ request()->routeIs('dashboard') ? 'text-pink-500 border-pink-500 font-semibold bg-gray-800' : '' }}">
-                    {{ __('Dashboard') }}
-                </x-responsive-nav-link>
-
                 <x-responsive-nav-link :href="route('events.index')" :active="request()->routeIs('events.index')"
                     class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-gray-300 hover:text-pink-400 hover:bg-gray-800 hover:border-pink-400 {{ request()->routeIs('events.index') ? 'text-pink-500 border-pink-500 font-semibold bg-gray-800' : '' }}">
                     {{ __('View All Events') }}
