@@ -12,6 +12,11 @@ class Artist extends Model
         'genre',
     ];
 
+    /**
+     * Define the many-to-many relationship with Event
+     * An artist can perform at multiple events
+     * Uses the 'artist_event' pivot table
+     */
     public function events()
     {
         return $this->belongsToMany(Event::class);

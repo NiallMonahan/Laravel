@@ -20,11 +20,20 @@ class Event extends Model
         'image',
     ];
 
+    /**
+     * Define the one-to-many relationship with Ticket
+     * One event can have multiple tickets
+     */
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
     }
 
+    /**
+     * Define the many-to-many relationship with Artist
+     * An event can have multiple artists, and an artist can perform at multiple events
+     * Uses the 'artist_event' pivot table
+     */
     public function artists()
     {
         return $this->belongsToMany(Artist::class);
